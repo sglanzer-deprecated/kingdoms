@@ -1,0 +1,25 @@
+<div class="game">
+	<div class="game-destroyed">
+		
+	</div>
+	<div class="game-deck">
+		
+	</div>
+	<div class="game-lineup">
+		
+	</div>
+	<div class="game-kick">
+		
+	</div>
+	<div class="game-super-villian">
+		
+	</div>
+	<div class="game-weakness">
+		
+	</div>
+	<div class="player-deck">
+		{{#each card in cards}}
+			{{game-card name=card.name type=card.type power=card.power actions=card.actions}}
+		{{/each}}
+	</div>
+</div>

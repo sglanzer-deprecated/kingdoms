@@ -1,0 +1,9 @@
+@import '../../bower_components/bourbon/dist/bourbon';
+
+.game-card {
+  width: 150px;
+  height: 200px;
+  @include background-image(linear-gradient(#171717, #101010));
+  @include border-top-radius(5px);
+  @include border-bottom-radius(5px);
+}
