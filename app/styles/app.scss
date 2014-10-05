@@ -1,11 +1,91 @@
 @import '../../bower_components/bourbon/dist/bourbon';
 
 html {
-  background: url('images/background.jpg') no-repeat center center fixed;
+  background: url('images/background.jpg') no-repeat center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+}
+
+html, body {
+  height: 100%;
+  margin: 0px;
+}
+
+.game-area-card {
+  width: 150px;
+  height: 200px;
+  @include border-top-radius(5px);
+  @include border-bottom-radius(5px);
+  background-color: white;
+  opacity: 0.8;
+  border: 2px solid #000000;
+
+  > .title {
+    text-align: center;
+  }
+}
+
+.application {
+  height: 100%;
+}
+
+.game {
+  width: 100%;
+  height: 100%;
+  @include display(flex);
+  @include flex-direction(column);
+  @include justify-content(space-around);
+
+  > .game-area {
+    @include display(flex);
+    @include flex-direction(row);
+
+    > #game-area-deck {
+      @include display(flex);
+      @include flex-direction(column);
+
+      > #game-deck {
+        > .title {
+          background-color: dodgerblue;
+        }
+      }
+
+      > #game-kick {
+        > .title {
+          background-color: orangered;
+        }
+      }
+
+      > #game-destroyed {
+        > .title {
+          background-color: black;
+        }
+      }
+    }
+
+    > #game-lineup {
+      @include flex(1);
+    }
+
+    > #game-area-villain {
+      @include display(flex);
+      @include flex-direction(column);
+
+      > #game-super-villain {
+        > .title {
+          background-color: red;
+        }
+      }
+
+      > #game-weakness {
+        > .title {
+          background-color: green;
+        }
+      }
+    }
+  }
 }
 
 .game-card {
@@ -14,4 +94,5 @@ html {
   @include background-image(linear-gradient(#171717, #101010));
   @include border-top-radius(5px);
   @include border-bottom-radius(5px);
+  border: 2px solid white;
 }
