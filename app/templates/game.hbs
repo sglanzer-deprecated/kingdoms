@@ -35,9 +35,20 @@
             </div>
         </div>
     </div>
-	<div class="player-deck">
-		{{#each card in cards}}
-			{{game-card name=card.name type=card.type power=card.power actions=card.actions}}
-		{{/each}}
-	</div>
+    <div id="player-area">
+        <div id="player-area-deck">
+
+        </div>
+        <div id="player-area-discard">
+
+        </div>
+        <div id="player-area-hand">
+            {{#each card in cards}}
+                {{game-card name=card.name type=card.type power=card.power actions=card.actions}}
+            {{/each}}
+        </div>
+        <div id="player-area-heroes">
+
+        </div>
+    </div>
 </div>
