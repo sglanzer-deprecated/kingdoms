@@ -1,12 +1,14 @@
-<div class="game-card">
-	<div class="name">{{name}}</div>
-	<div class="type">{{type}}</div>
-	<div class="power">{{power}}</div>
-	<div class="actions">
-		{{#each action in actions}}
-			<div class="action">
-				{{action}}
-			</div>
-		{{/each}}
-	</div>
+<div class="name">{{card.name}}</div>
+<div class="image"></div>
+<div class="type">{{card.type}}</div>
+<div class="actions">
+    {{#each action in card.actions}}
+        <div class="action">
+            {{action.value}}
+        </div>
+    {{/each}}
+</div>
+<div class="points">{{card.points}}</div>
+<div class="cost">
+    <div class="value">{{card.cost}}</div>
 </div>

@@ -1,54 +1,65 @@
 <div class="game">
     <div class="game-area">
         <div id="game-area-deck">
-            <div id="game-deck" class="game-area-card">
+            <div id="game-deck" class="card-area small">
                 <div class="title">
                     Deck
                 </div>
             </div>
-            <div id="game-kick" class="game-area-card">
+            <div id="game-kick" class="card-area small">
                 <div class="title">
                     Kick
                 </div>
             </div>
-            <div id="game-destroyed" class="game-area-card">
+            <div id="game-weakness" class="card-area small">
+                <div class="title">
+                    Weakness
+                </div>
+            </div>
+            <div id="game-destroyed" class="card-area small">
                 <div class="title">
                     Destroyed
                 </div>
             </div>
         </div>
-        <div id="game-lineup" class="game-area-card">
+        <div id="game-lineup" class="card-area full">
             <div class="title">
                 Lineup
             </div>
         </div>
-        <div id="game-area-villain">
-            <div id="game-super-villain" class="game-area-card">
-                <div class="title">
-                    Super Villain
-                </div>
-            </div>
-            <div id="game-weakness" class="game-area-card">
-                <div class="title">
-                    Weakness
-                </div>
+        <div id="game-super-villain" class="card-area large">
+            <div class="title">
+                Super Villain
             </div>
         </div>
     </div>
     <div id="player-area">
         <div id="player-area-deck">
-
+            <div id="player-deck" class="card-area small">
+                <div class="title">
+                    Player Deck
+                </div>
+            </div>
+            <div id="player-discard" class="card-area small">
+                <div class="title">
+                    Player Discard
+                </div>
+            </div>
         </div>
-        <div id="player-area-discard">
-
+        <div id="player-area-hand" class="card-area full">
+            <div class="title">
+                Hand
+            </div>
+            <div class="cards">
+                {{#each card in cards}}
+                    {{game-card card=card}}
+                {{/each}}
+            </div>
         </div>
-        <div id="player-area-hand">
-            {{#each card in cards}}
-                {{game-card name=card.name type=card.type power=card.power actions=card.actions}}
-            {{/each}}
-        </div>
-        <div id="player-area-heroes">
-
+        <div id="player-area-hero" class="card-area large">
+            <div class="title">
+                Hero
+            </div>
         </div>
     </div>
 </div>
