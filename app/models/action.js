@@ -6,7 +6,8 @@ var ActionModel = DS.Model.extend({
 
 ActionModel.reopenClass({
     FIXTURES: [
-        { id: 1, value: "+1 Power" }
+        { id: 1, value: "+1 Power" },
+        { id: 2, value: "" }
     ]
 });
 

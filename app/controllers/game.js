@@ -1,7 +1,9 @@
 import Ember from 'ember';
 
 export default Ember.ObjectController.extend({
-	remainingGameDeckCards: function() {
-		return this.get('cards').get('length');
-	}.property('cards')
+	deck: function() {
+        var deck = this.get('players').findBy('name', 'Steven').get('deck');
+        console.log(deck.get('cards'));
+		return deck;
+	}.property('players')
 });
