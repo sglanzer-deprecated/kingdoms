@@ -2,7 +2,7 @@ import DS from 'ember-data';
 
 var PlayerDeckModel = DS.Model.extend({
     player: DS.belongsTo('player'),
-    cards: DS.hasMany('game-card')
+    cards: DS.hasMany('game-card', {inverse: null})
 });
 
 PlayerDeckModel.reopenClass({

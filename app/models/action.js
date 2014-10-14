@@ -7,7 +7,9 @@ var ActionModel = DS.Model.extend({
 ActionModel.reopenClass({
     FIXTURES: [
         { id: 1, value: "+1 Power" },
-        { id: 2, value: "" }
+        { id: 2, value: "" },
+        { id: 3, value: "+2 Power" },
+        { id: 4, value: "Attack: Each foe chooses and discards a card." }
     ]
 });
 

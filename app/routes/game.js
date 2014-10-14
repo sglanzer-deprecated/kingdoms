@@ -9,6 +9,17 @@ export default Ember.Route.extend({
         // Retrieve all the cards available to the game
         route.store.find('card').then(
             function(cards) {
+                // Initialize the main deck
+                var gameDeck = route.store.createRecord('game-deck');
+
+                // Add 20 bane cards to the main deck
+                var baneCard = cards.findBy('name', "Bane");
+                for (var cardCount = 0; cardCount < 7; cardCount++) {
+                    gameDeck.get('cards').addObject(route.store.createRecord('game-card', {
+                        card: baneCard
+                    }));
+                }
+
                 // Initialize the players
                 playerNames.forEach(function(playerName) {
                     var player = route.store.createRecord('player', {
@@ -37,11 +48,31 @@ export default Ember.Route.extend({
 
         // Populate the model
 		return Ember.RSVP.hash({
+            deck: this.store.find('game-deck'),
+            kicks: [],
 			players: this.store.find('player')
 		});
 	},
 
     setupController: function(controller, model) {
+        // Retrieve the game deck
+        var gameController = this.controllerFor('game');
+        var gameDeck = model.deck.get('firstObject').get('cards');
+
+        // Shuffle the game deck
+        var shuffledGameDeck = _.shuffle(gameDeck.toArray());
+
+        // Set the game deck
+        gameController.set('deck', shuffledGameDeck);
+
+        // Deal 5 cards into the game lineup
+        var lineup = [];
+        lineup.addObjects(shuffledGameDeck.slice(0, 5));
+        shuffledGameDeck.removeObjects(lineup);
+
+        // Set the game lineup
+        gameController.set('lineup', lineup);
+
         // Retrieve the deck for player 'Steven'
         var playerController = this.controllerFor('player');
         var deck = model.players.findBy('name', 'Steven').get('deck').get('cards');

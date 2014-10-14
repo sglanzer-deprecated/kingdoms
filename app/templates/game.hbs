@@ -26,6 +26,11 @@
             <div class="title">
                 Lineup
             </div>
+            <div class="cards">
+                {{#each card in lineup}}
+                    {{game-card card=card}}
+                {{/each}}
+            </div>
         </div>
         <div id="game-super-villain" class="card-area large">
             <div class="title">

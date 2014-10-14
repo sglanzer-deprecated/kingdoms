@@ -80,6 +80,11 @@ html, body {
     > #game-lineup {
       @include flex(1);
       background-color: white;
+
+      > .cards {
+        @include display(flex);
+        @include flex-direction(row);
+      }
     }
 
     > #game-super-villain {
