@@ -33,33 +33,5 @@
             </div>
         </div>
     </div>
-    <div id="player-area">
-        <div id="player-area-deck">
-            <div id="player-deck" class="card-area small">
-                <div class="title">
-                    Player Deck
-                </div>
-            </div>
-            <div id="player-discard" class="card-area small">
-                <div class="title">
-                    Player Discard
-                </div>
-            </div>
-        </div>
-        <div id="player-area-hand" class="card-area full">
-            <div class="title">
-                Hand
-            </div>
-            <div class="cards">
-                {{#each card in deck.cards}}
-                    {{game-card card=card}}
-                {{/each}}
-            </div>
-        </div>
-        <div id="player-area-hero" class="card-area large">
-            <div class="title">
-                Hero
-            </div>
-        </div>
-    </div>
+    {{outlet player}}
 </div>

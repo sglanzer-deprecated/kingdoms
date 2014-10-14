@@ -16,7 +16,8 @@ export default Ember.Route.extend({
                         deck: route.store.createRecord('player-deck', {})
                     });
 
-                    // Add 7 punch cards to the player deck
+                    // Add 7 punch cards and 3 vulnerability
+                    // cards to each player deck
                     var punchCard = cards.findBy('name', "Punch");
                     for (var cardCount = 0; cardCount < 7; cardCount++) {
                         player.get('deck').get('cards').addObject(route.store.createRecord('game-card', {
@@ -24,7 +25,6 @@ export default Ember.Route.extend({
                         }));
                     }
 
-                    // Add 3 vulnerability cards to the player deck
                     var vulnerabilityCard = cards.findBy('name', "Vulnerability");
                     for (cardCount = 0; cardCount < 3; cardCount++) {
                         player.get('deck').get('cards').addObject(route.store.createRecord('game-card', {
@@ -39,5 +39,35 @@ export default Ember.Route.extend({
 		return Ember.RSVP.hash({
 			players: this.store.find('player')
 		});
-	}
+	},
+
+    setupController: function(controller, model) {
+        // Retrieve the deck for player 'Steven'
+        var playerController = this.controllerFor('player');
+        var deck = model.players.findBy('name', 'Steven').get('deck').get('cards');
+
+        // Shuffle the player deck
+        var shuffledDeck = _.shuffle(deck.toArray());
+
+        // Set the player deck
+        playerController.set('deck', shuffledDeck);
+
+        // Deal 5 cards into the player hand
+        var hand = [];
+        hand.addObjects(shuffledDeck.slice(0, 5));
+        shuffledDeck.removeObjects(hand);
+
+        // Set the player hand
+        playerController.set('hand', hand);
+    },
+
+    renderTemplate: function() {
+        this.render();
+
+        this.render('player', {
+            into: 'game',
+            outlet: 'player',
+            controller: 'player'
+        });
+    }
 });
