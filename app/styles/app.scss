@@ -62,6 +62,10 @@ html, body {
 
       > #game-deck {
         background-color: dodgerblue;
+
+        > #game-deck-total {
+          color: black;
+        }
       }
 
       > #game-kick {
@@ -84,6 +88,10 @@ html, body {
       > .cards {
         @include display(flex);
         @include flex-direction(row);
+
+        .cost:hover {
+          background-color: green;
+        }
       }
     }
 
@@ -102,10 +110,18 @@ html, body {
 
       > #player-deck {
         background-color: dodgerblue;
+
+        > #player-discard-total {
+          color: black;
+        }
       }
 
       > #player-discard {
         background-color: black;
+
+        > #player-discard-total {
+          color: white;
+        }
       }
     }
 

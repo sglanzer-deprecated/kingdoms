@@ -14,7 +14,7 @@ export default Ember.Route.extend({
 
                 // Add 20 bane cards to the main deck
                 var baneCard = cards.findBy('name', "Bane");
-                for (var cardCount = 0; cardCount < 7; cardCount++) {
+                for (var cardCount = 0; cardCount < 20; cardCount++) {
                     gameDeck.get('cards').addObject(route.store.createRecord('game-card', {
                         card: baneCard
                     }));
@@ -100,5 +100,22 @@ export default Ember.Route.extend({
             outlet: 'player',
             controller: 'player'
         });
+    },
+
+    actions: {
+        purchaseCard: function(card) {
+            var gameController = this.controllerFor('game');
+            gameController.get('lineup').removeObject(card);
+
+            var playerController = this.controllerFor('player');
+            playerController.get('discard').addObject(card);
+        },
+
+        endTurn: function() {
+            var gameController = this.controllerFor('game');
+            var dealtDeckCards = gameController.get('deck').slice(0, 5);
+            gameController.get('deck').removeObjects(dealtDeckCards);
+            gameController.get('lineup').addObjects(dealtDeckCards);
+        }
     }
 });
