@@ -12,11 +12,22 @@ export default Ember.Route.extend({
                 // Initialize the main deck
                 var gameDeck = route.store.createRecord('game-deck');
 
-                // Add 20 bane cards to the main deck
-                var baneCard = cards.findBy('name', "Bane");
+                // Add 20 Bane cards to the main deck
+                var baneCard = cards.findBy('name', 'Bane');
                 for (var cardCount = 0; cardCount < 20; cardCount++) {
                     gameDeck.get('cards').addObject(route.store.createRecord('game-card', {
                         card: baneCard
+                    }));
+                }
+
+                // Initialize the super villain deck
+                var superVillainDeck = route.store.createRecord('super-villain-deck');
+
+                // Add 10 Ra's cards to the super villain deck
+                var rasCard = cards.findBy('name', 'Ras Al Ghul');
+                for (cardCount = 0; cardCount < 10; cardCount++) {
+                    superVillainDeck.get('cards').addObject(route.store.createRecord('game-card', {
+                        card: rasCard
                     }));
                 }
 
@@ -29,14 +40,14 @@ export default Ember.Route.extend({
 
                     // Add 7 punch cards and 3 vulnerability
                     // cards to each player deck
-                    var punchCard = cards.findBy('name', "Punch");
+                    var punchCard = cards.findBy('name', 'Punch');
                     for (var cardCount = 0; cardCount < 7; cardCount++) {
                         player.get('deck').get('cards').addObject(route.store.createRecord('game-card', {
                             card: punchCard
                         }));
                     }
 
-                    var vulnerabilityCard = cards.findBy('name', "Vulnerability");
+                    var vulnerabilityCard = cards.findBy('name', 'Vulnerability');
                     for (cardCount = 0; cardCount < 3; cardCount++) {
                         player.get('deck').get('cards').addObject(route.store.createRecord('game-card', {
                             card: vulnerabilityCard
@@ -49,6 +60,7 @@ export default Ember.Route.extend({
         // Populate the model
 		return Ember.RSVP.hash({
             deck: this.store.find('game-deck'),
+            superVillainDeck: this.store.find('super-villain-deck'),
             kicks: [],
 			players: this.store.find('player')
 		});
@@ -73,15 +85,33 @@ export default Ember.Route.extend({
         // Set the game lineup
         gameController.set('lineup', lineup);
 
+
+        // Retrieve the super villain deck
+        var superVillainDeck = model.superVillainDeck.get('firstObject').get('cards');
+
+        // Shuffle the super villain deck
+        var shuffledSuperVillainDeck = _.shuffle(superVillainDeck.toArray());
+
+        // Set the super villain deck
+        gameController.set('superVillainDeck', shuffledSuperVillainDeck);
+
+        // Deal a card into the super villain lineup
+        var superVillainLineup = [];
+        superVillainLineup.addObjects(shuffledSuperVillainDeck.slice(0, 1));
+        shuffledSuperVillainDeck.removeObjects(superVillainLineup);
+
+        // Set the super villain lineup
+        gameController.set('superVillainLineup', superVillainLineup);
+
+
         // Retrieve the deck for player 'Steven'
-        var playerController = this.controllerFor('player');
         var deck = model.players.findBy('name', 'Steven').get('deck').get('cards');
 
         // Shuffle the player deck
         var shuffledDeck = _.shuffle(deck.toArray());
 
         // Set the player deck
-        playerController.set('deck', shuffledDeck);
+        gameController.set('playerDeck', shuffledDeck);
 
         // Deal 5 cards into the player hand
         var hand = [];
@@ -89,7 +119,7 @@ export default Ember.Route.extend({
         shuffledDeck.removeObjects(hand);
 
         // Set the player hand
-        playerController.set('hand', hand);
+        gameController.set('playerHand', hand);
     },
 
     renderTemplate: function() {
@@ -100,22 +130,5 @@ export default Ember.Route.extend({
             outlet: 'player',
             controller: 'player'
         });
-    },
-
-    actions: {
-        purchaseCard: function(card) {
-            var gameController = this.controllerFor('game');
-            gameController.get('lineup').removeObject(card);
-
-            var playerController = this.controllerFor('player');
-            playerController.get('discard').addObject(card);
-        },
-
-        endTurn: function() {
-            var gameController = this.controllerFor('game');
-            var dealtDeckCards = gameController.get('deck').slice(0, 5);
-            gameController.get('deck').removeObjects(dealtDeckCards);
-            gameController.get('lineup').addObjects(dealtDeckCards);
-        }
     }
 });

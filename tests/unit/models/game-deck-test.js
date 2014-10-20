@@ -3,7 +3,7 @@ import {
   test
 } from 'ember-qunit';
 
-moduleForModel('game-deck', 'GameDeck', {
+moduleForModel('game-deck', 'SuperVillainDeck', {
   // Specify the other units that are required for this test.
   needs: []
 });

@@ -1,45 +1,52 @@
-<div class="game">
-    <div class="game-area">
-        <div id="game-area-deck">
-            <div id="game-deck" class="card-area small">
-                <div class="title">
-                    Deck
-                </div>
-                <div id="game-deck-total">
-                    {{deckCount}}
-                </div>
+<div id="game-layout">
+    {{#liquid-if overviewSideBarExpanded class="side-bar"}}
+        <div id="overview-side-bar" class="expanded">
+            <div id="overview-side-bar-toggle" {{action 'overviewSideBarToggle'}}></div>
+            <div id="hoard">Main Deck</div>
+            <div id="trinkets">
+                <div id="kick">Kick</div>
+                <div id="weakness">Weakness</div>
             </div>
-            <div id="game-kick" class="card-area small">
-                <div class="title">
-                    Kick
-                </div>
-            </div>
-            <div id="game-weakness" class="card-area small">
-                <div class="title">
-                    Weakness
-                </div>
-            </div>
-            <div id="game-destroyed" class="card-area small">
-                <div class="title">
-                    Destroyed
-                </div>
-            </div>
+            <div id="graveyard">Destroy</div>
+            <div id="rivals">Rival Players</div>
         </div>
-        <div id="game-lineup" class="card-area full">
-            <div class="title">
-                Lineup
+    {{else}}
+        <div id="overview-side-bar" class="collapsed">
+            <div id="overview-side-bar-toggle" {{action 'overviewSideBarToggle'}}></div>
+        </div>
+    {{/liquid-if}}
+
+    <div id="game-content-layout">
+        <div id="trove">
+            <div id="villain">
+                {{#each card in superVillainLineup}}
+                    {{game-card card=card purchaseCard='purchaseSuperVillainLineupCard'}}
+                {{/each}}
             </div>
-            <div class="cards">
+            <div id="chest">
                 {{#each card in lineup}}
-                    {{game-card card=card}}
+                    {{game-card card=card purchaseCard='purchaseLineupCard'}}
                 {{/each}}
             </div>
         </div>
-        <div id="game-super-villain" class="card-area large">
-            <div class="title">
-                Super Villain
+        <div id="game-action-layout">
+            <div id="lasting-player-actions">
+                <div id="player-heroes">Heroes</div>
+                <div id="player-locations">Locations</div>
+                <div id="player-fortress">Active Cards</div>
+                <div id="player-trove">Player Deck</div>
+                <div id="player-discard">Player Discard</div>
+            </div>
+            <div id="dynamic-actions-layout">
+                <div id="events">
+                    <button {{action 'endTurn'}}>End Turn</button>
+                </div>
+                <div id="transient-player-actions">
+                    {{#each card in playerHand}}
+                        {{game-card card=card}}
+                    {{/each}}
+                </div>
             </div>
         </div>
     </div>
-    {{outlet player}}
 </div>

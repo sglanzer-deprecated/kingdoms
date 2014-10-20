@@ -1,14 +1,16 @@
-<div class="name">{{card.card.name}}</div>
+{{#with card.card}}
+<div class="name">{{name}}</div>
 <div class="image"></div>
-<div class="type">{{card.card.type}}</div>
+<div class="type">{{type}}</div>
 <div class="actions">
-    {{#each action in card.card.actions}}
+    {{#each action in actions}}
         <div class="action">
             {{action.value}}
         </div>
     {{/each}}
 </div>
-<div class="points">{{card.card.points}}</div>
+<div class="points">{{points}}</div>
 <div class="cost" {{action 'purchaseCard'}}>
-    <div class="value">{{card.card.cost}}</div>
+    <div class="value">{{cost}}</div>
 </div>
+{{/with}}

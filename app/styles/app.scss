@@ -1,5 +1,6 @@
 @import '../../bower_components/bourbon/dist/bourbon';
 
+// Global page settings
 html {
   background: url('images/background.jpg') no-repeat center fixed;
   -webkit-background-size: cover;
@@ -13,131 +14,18 @@ html, body {
   margin: 0px;
 }
 
-.card-area {
-  width: 150px;
-  @include border-top-radius(5px);
-  @include border-bottom-radius(5px);
-  background-color: white;
-  opacity: 0.8;
-  border: 2px solid #000000;
-
-  > .title {
-    height: 20px;
-    text-align: center;
-    background-color: white;
-    border-bottom: 1px solid black;
-  }
-
-  &.small {
-    height: 50px;
-  }
-
-  &.large {
-    height: 235px;
-  }
-
-  &.full {
-    height: 235px;
-  }
-}
+$CardWidth: 200px;
+$CardHeight: 280px;
 
 .application {
   height: 100%;
 }
 
-.game {
-  width: 100%;
+.side-bar {
   height: 100%;
-  @include display(flex);
-  @include flex-direction(column);
-  @include justify-content(space-around);
 
-  > .game-area {
-    @include display(flex);
-    @include flex-direction(row);
-
-    > #game-area-deck {
-      @include display(flex);
-      @include flex-direction(column);
-
-      > #game-deck {
-        background-color: dodgerblue;
-
-        > #game-deck-total {
-          color: black;
-        }
-      }
-
-      > #game-kick {
-        background-color: orangered;
-      }
-
-      > #game-weakness {
-        background-color: green;
-      }
-
-      > #game-destroyed {
-        background-color: black;
-      }
-    }
-
-    > #game-lineup {
-      @include flex(1);
-      background-color: white;
-
-      > .cards {
-        @include display(flex);
-        @include flex-direction(row);
-
-        .cost:hover {
-          background-color: green;
-        }
-      }
-    }
-
-    > #game-super-villain {
-      background-color: red;
-    }
-  }
-
-  > #player-area {
-    @include display(flex);
-    @include flex-direction(row);
-
-    > #player-area-deck {
-      @include display(flex);
-      @include flex-direction(column);
-
-      > #player-deck {
-        background-color: dodgerblue;
-
-        > #player-discard-total {
-          color: black;
-        }
-      }
-
-      > #player-discard {
-        background-color: black;
-
-        > #player-discard-total {
-          color: white;
-        }
-      }
-    }
-
-    > #player-area-hand {
-      @include flex(1);
-      background-color: white;
-
-      > .cards {
-        @include display(flex);
-        @include flex-direction(row);
-      }
-    }
-
-    > #player-area-hero {
-      background-color: indigo;
-    }
+  > .liquid-child {
+    height: 100%;
   }
 }
 
@@ -201,6 +89,155 @@ html, body {
       position: relative;
       top: 5px;
       left: 12px;
+    }
+  }
+}
+
+#game-layout {
+  height: 100%;
+  @include display(flex);
+  @include flex-direction(row);
+
+  #overview-side-bar {
+    height: 100%;
+    @include display(flex);
+    @include flex-direction(column);
+    background-color: darkgray;
+
+    #overview-side-bar-toggle {
+      height: 20px;
+      width: 100%;
+      background-color: gray;
+    }
+
+    &.expanded {
+      width: $CardWidth;
+    }
+
+    &.collapsed {
+      width: 20px;
+    }
+
+    #hoard {
+      width: 100%;
+      height: 20px;
+      background-color: purple;
+    }
+
+    #trinkets {
+      width: 100%;
+      @include display(flex);
+      @include flex-direction(row);
+
+      #kick {
+        @include flex(1);
+        height: 20px;
+        background-color: blueviolet;
+      }
+
+      #weakness {
+        @include flex(1);
+        height: 20px;
+        background-color: mediumpurple;
+      }
+    }
+
+    #graveyard {
+      width: 100%;
+      height: 20px;
+      background-color: darkorchid;
+    }
+
+    #rivals {
+      @include flex(1);
+      width: 100%;
+      background-color: mediumorchid;
+    }
+  }
+
+  #game-content-layout {
+    @include flex(1);
+    height: 100%;
+    @include display(flex);
+    @include flex-direction(column);
+
+    #trove {
+      @include flex(1);
+      @include display(flex);
+      @include flex-direction(row);
+
+      .cost:hover {
+        background-color: green;
+        cursor: pointer;
+      }
+
+      #villain {
+        width: $CardWidth;
+        background-color: darkred;
+      }
+
+      #chest {
+        @include flex(1);
+        @include display(flex);
+        @include flex-direction(row);
+        background-color: red;
+      }
+    }
+
+    #game-action-layout {
+      @include flex(2);
+      @include display(flex);
+      @include flex-direction(row);
+
+      #lasting-player-actions {
+        @include display(flex);
+        @include flex-direction(column);
+
+        #player-heroes {
+          @include flex(1);
+          width: $CardWidth;
+          background-color: cornflowerblue;
+        }
+        #player-locations {
+          @include flex(1);
+          width: $CardWidth;
+          background-color: darkcyan;
+        }
+        #player-fortress {
+          @include flex(1);
+          width: $CardWidth;
+          background-color: slateblue;
+        }
+        #player-trove {
+          @include flex(1);
+          width: $CardWidth;
+          height: 20px;
+          background-color: royalblue;
+        }
+        #player-discard {
+          @include flex(1);
+          height: 20px;
+          background-color: steelblue;
+        }
+      }
+
+      #dynamic-actions-layout {
+        @include flex(1);
+        @include display(flex);
+        @include flex-direction(column);
+
+        #events {
+          @include flex(1);
+          background-color: green;
+        }
+
+        #transient-player-actions {
+          @include flex(1);
+          @include display(flex);
+          @include flex-direction(row);
+          background-color: blue;
+        }
+      }
     }
   }
 }
