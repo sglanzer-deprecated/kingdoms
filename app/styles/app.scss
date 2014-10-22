@@ -166,9 +166,16 @@ $CardHeight: 280px;
       @include display(flex);
       @include flex-direction(row);
 
-      .cost:hover {
-        background-color: green;
+      .cost {
         cursor: pointer;
+
+        &.affordable:hover {
+          background-color: green;
+        }
+
+        &.not-affordable:hover {
+          background-color: red;
+        }
       }
 
       #villain {
@@ -236,6 +243,10 @@ $CardHeight: 280px;
           @include display(flex);
           @include flex-direction(row);
           background-color: blue;
+
+          .game-card:hover {
+            opacity: 0.8;
+          }
         }
       }
     }

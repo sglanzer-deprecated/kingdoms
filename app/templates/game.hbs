@@ -20,12 +20,12 @@
         <div id="trove">
             <div id="villain">
                 {{#each card in superVillainLineup}}
-                    {{game-card card=card purchaseCard='purchaseSuperVillainLineupCard'}}
+                    {{game-card card=card playerPower=playerPower purchaseCard='purchaseSuperVillainLineupCard'}}
                 {{/each}}
             </div>
             <div id="chest">
                 {{#each card in lineup}}
-                    {{game-card card=card purchaseCard='purchaseLineupCard'}}
+                    {{game-card card=card playerPower=playerPower purchaseCard='purchaseLineupCard'}}
                 {{/each}}
             </div>
         </div>
@@ -35,15 +35,20 @@
                 <div id="player-locations">Locations</div>
                 <div id="player-fortress">Active Cards</div>
                 <div id="player-trove">Player Deck</div>
-                <div id="player-discard">Player Discard</div>
+                <div id="player-discard">
+                    Player Discard
+                    <div>{{playerDiscardCount}}</div>
+                </div>
             </div>
             <div id="dynamic-actions-layout">
                 <div id="events">
+                    <div>Played Cards {{playerPlayedCardsCount}}</div>
+                    <div>Power {{playerPower}}</div>
                     <button {{action 'endTurn'}}>End Turn</button>
                 </div>
                 <div id="transient-player-actions">
                     {{#each card in playerHand}}
-                        {{game-card card=card}}
+                        {{game-card card=card playCard='playCard'}}
                     {{/each}}
                 </div>
             </div>

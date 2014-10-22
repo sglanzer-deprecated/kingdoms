@@ -120,15 +120,5 @@ export default Ember.Route.extend({
 
         // Set the player hand
         gameController.set('playerHand', hand);
-    },
-
-    renderTemplate: function() {
-        this.render();
-
-        this.render('player', {
-            into: 'game',
-            outlet: 'player',
-            controller: 'player'
-        });
     }
 });
